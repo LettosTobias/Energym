@@ -2,8 +2,6 @@
 
 Este proyecto es el backend de Energym, desarrollado con Spring Boot y PostgreSQL. Expone una API REST que se puede consultar y probar mediante Swagger.
 
-> ⚠️ Este proyecto no incluye interfaz gráfica (frontend). Solo expone endpoints de backend. Si se desea, un frontend puede ser creado por separado.
-
 ---
 
 ## Requisitos
@@ -19,16 +17,14 @@ No es necesario tener Java ni PostgreSQL instalados localmente, ya que todo corr
 
 ## Configuración
 
-Los servicios se definen en el archivo `docker-compose.yml`:
+  ###Desde la raiz del proyecto:
+    -./mvnw clean package -DskipTests
+    - docker-compose up --build
 
-- **db**: Base de datos PostgreSQL
-  - Base de datos: `midb`
-  - Usuario: `postgres`
-  - Contraseña: `postgres`
-
+- La aplicación ya viene preconfigurada para conectarse a una base de datos **PostgreSQL en la nube mediante Neon**, por lo que al levantarla ya tendrás datos disponibles para interactuar.
 - **app**: Aplicación Spring Boot que expone la API en el puerto `9090` de tu máquina.
-- Los datos de la base se persisten en un volumen Docker llamado db_data.
-
+- Los datos que modifiques a través de la API se almacenan directamente en la base Neon, por lo que estarán disponibles desde cualquier dispositivo que consuma la API.
+  
 La aplicación se conecta automáticamente a la base de datos gracias a las variables de entorno configuradas en `docker-compose.yml`.
 
 ---
@@ -42,4 +38,3 @@ Podés explorar y probar los endpoints de la API desde el siguiente enlace:
 👉 [http://localhost:9090/swagger-ui/index.html](http://localhost:9090/swagger-ui/index.html)
 
 Desde ahí podés explorar y probar todos los endpoints de la API mediante la interfaz de Swagger.
-
