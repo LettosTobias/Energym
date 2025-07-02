@@ -1,4 +1,4 @@
-#Energym - Backend API (Spring Boot + Docker + PostgreSQL)
+# Energym - Backend API (Spring Boot + Docker + PostgreSQL)
 
 Este proyecto es el backend de Energym, desarrollado con Spring Boot y PostgreSQL. Expone una API REST que se puede consultar y probar mediante Swagger.
 
