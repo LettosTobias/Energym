@@ -17,7 +17,7 @@ No es necesario tener Java ni PostgreSQL instalados localmente, ya que todo corr
 
 ## Configuración
 
-  ###Desde la raiz del proyecto:
+  ### Desde la raiz del proyecto:
     -./mvnw clean package -DskipTests
     - docker-compose up --build
 
