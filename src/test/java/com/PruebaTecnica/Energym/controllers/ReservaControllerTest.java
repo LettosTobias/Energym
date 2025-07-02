@@ -83,7 +83,7 @@ public class ReservaControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/reservas/1/asistio"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.cantidad de clases asistidas este mes").value(4));
+                .andExpect(jsonPath("$['cantidad de clases asistidas este mes']").value(4));
     }
 
 }
