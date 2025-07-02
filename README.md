@@ -27,6 +27,7 @@ Los servicios se definen en el archivo `docker-compose.yml`:
   - Contraseña: `postgres`
 
 - **app**: Aplicación Spring Boot que expone la API en el puerto `9090` de tu máquina.
+- Los datos de la base se persisten en un volumen Docker llamado db_data.
 
 La aplicación se conecta automáticamente a la base de datos gracias a las variables de entorno configuradas en `docker-compose.yml`.
 
@@ -34,9 +35,11 @@ La aplicación se conecta automáticamente a la base de datos gracias a las vari
 
 ## Instrucciones de uso
 
-1. **Compilar la aplicación**
+#  ACCEDER A LA API
 
-Primero, asegurate de tener el JAR generado. Desde la raíz del proyecto, ejecutá:
+Podés explorar y probar los endpoints de la API desde el siguiente enlace:
 
-```bash
-./mvnw clean package
+👉 [http://localhost:9090/swagger-ui/index.html](http://localhost:9090/swagger-ui/index.html)
+
+Desde ahí podés explorar y probar todos los endpoints de la API mediante la interfaz de Swagger.
+
