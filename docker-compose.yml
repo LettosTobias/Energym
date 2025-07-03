@@ -5,8 +5,4 @@ services:
     build: .
     ports:
       - "9090:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://ep-noisy-bird-a8yotb4o-pooler.eastus2.azure.neon.tech:5432/MiDB?sslmode=require&channel_binding=require
-      SPRING_DATASOURCE_USERNAME: neondb_owner
-      SPRING_DATASOURCE_PASSWORD: npg_r8EGS9RmYlQe
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
