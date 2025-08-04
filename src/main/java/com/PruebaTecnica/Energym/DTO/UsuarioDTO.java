@@ -12,6 +12,7 @@ import lombok.Setter;
 public class UsuarioDTO implements Serializable {
     private Integer id;
     private String nombre;
+    private String apellido;
     private String email;
     private String telefono;
 
@@ -25,14 +26,16 @@ public class UsuarioDTO implements Serializable {
         this.nombre = u.getNombre();
         this.email = u.getEmail();
         this.telefono = u.getTelefono();
+        this.apellido = u.getApellido();
     }
 
     // Constructor que recibe los campos
-    public UsuarioDTO(int id, String nombre, String email , String telefono) {
+    public UsuarioDTO(int id, String nombre, String email , String telefono , String apellido) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
+        this.apellido = apellido;
     }
     
 

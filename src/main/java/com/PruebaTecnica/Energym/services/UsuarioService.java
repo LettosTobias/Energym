@@ -3,6 +3,7 @@ package com.PruebaTecnica.Energym.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.PruebaTecnica.Energym.DTO.UsuarioDTO;
@@ -32,20 +33,26 @@ public class UsuarioService {
        nuevo.setEmail(usuarioDTO.getEmail());
        nuevo.setNombre(usuarioDTO.getNombre());
        nuevo.setTelefono(usuarioDTO.getTelefono());
+       nuevo.setApellido(usuarioDTO.getApellido());
        nuevo = usuarioRepository.save(nuevo);
        return new UsuarioDTO(nuevo);
     }
 
-    public List<UsuarioDTO> getUsuarios(){
-        return usuarioRepository.findAll()
+    public List<UsuarioDTO> getUsuarios() {
+        Sort sort = Sort.by(
+        Sort.Order.asc("apellido"),
+        Sort.Order.asc("nombre")
+    );
+        return usuarioRepository.findAll(sort)
             .stream()
             .map(UsuarioDTO::new)
             .toList();
     }
+
     
     public UsuarioDTO getUsuarioById(int id) {
         return usuarioRepository.findById(id)
-                .map(u -> new UsuarioDTO(u.getId(), u.getNombre(), u.getEmail(), u.getTelefono()))
+                .map(u -> new UsuarioDTO(u.getId(), u.getNombre(), u.getEmail(), u.getTelefono(), u.getApellido()))
                 .orElse(null);
     }
 

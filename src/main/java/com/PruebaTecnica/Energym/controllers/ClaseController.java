@@ -1,20 +1,30 @@
 package com.PruebaTecnica.Energym.controllers;
 
-import com.PruebaTecnica.Energym.DTO.ClaseDTO;
-import com.PruebaTecnica.Energym.services.ClaseService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
+import com.PruebaTecnica.Energym.DTO.ClaseDTO;
+import com.PruebaTecnica.Energym.services.ClaseService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "Clases", description = "Operaciones relacionadas a Clases")
 @RestController
@@ -34,6 +44,7 @@ public class ClaseController {
         @ApiResponse(responseCode = "400", description = "Solicitud inválida")
     })
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ClaseDTO> crearClase(@RequestBody ClaseDTO claseDTO) {
         ClaseDTO nuevaClase = claseService.save(claseDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevaClase);
@@ -42,6 +53,7 @@ public class ClaseController {
     @Operation(summary = "Listar todas las clases")
     @GetMapping
     public ResponseEntity<List<ClaseDTO>> getClases() {
+        
         return ResponseEntity.ok(claseService.getClases());
     }
 
@@ -66,6 +78,7 @@ public class ClaseController {
         @ApiResponse(responseCode = "404", description = "Clase no encontrada")
     })
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ClaseDTO> actualizarClase(@PathVariable int id, @RequestBody ClaseDTO claseActualizada) {
         try {
             ClaseDTO clase = claseService.actualizarClase(id, claseActualizada);
@@ -81,6 +94,7 @@ public class ClaseController {
         @ApiResponse(responseCode = "404", description = "Clase no encontrada")
     })
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Map<String, String>> borrarClase(@PathVariable int id) {
         boolean eliminado = claseService.borrarClase(id);
         if (eliminado) {

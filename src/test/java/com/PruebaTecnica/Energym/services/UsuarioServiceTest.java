@@ -1,5 +1,6 @@
 package com.PruebaTecnica.Energym.services;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +29,7 @@ class UsuarioServiceTest {
 
     @Test
     void save_DeberiaCrearUsuario() {
-        UsuarioDTO dto = new UsuarioDTO(0, "Juan", "juan@mail.com", "123456");
+        UsuarioDTO dto = new UsuarioDTO(0, "Juan", "juan@mail.com", "123456" , "Apellido");
 
         UsuarioModel guardado = new UsuarioModel();
         guardado.setId(1);
@@ -99,7 +100,7 @@ class UsuarioServiceTest {
         when(usuarioRepository.findById(1)).thenReturn(Optional.of(usuario));
         when(usuarioRepository.save(any(UsuarioModel.class))).thenReturn(usuario);
 
-        UsuarioDTO actualizado = new UsuarioDTO(1, "Nuevo", "nuevo@mail.com", "222");
+        UsuarioDTO actualizado = new UsuarioDTO(1, "Nuevo", "nuevo@mail.com", "222" , "Apellido");
 
         UsuarioDTO resultado = usuarioService.actualizarUsuario(1, actualizado);
 

@@ -35,7 +35,7 @@ class UsuarioControllerTest {
 
     @Test
     void crearUsuario_DeberiaRetornar201() throws Exception {
-        UsuarioDTO dto = new UsuarioDTO(1, "Juan", "juan@mail.com", "123456");
+        UsuarioDTO dto = new UsuarioDTO(1, "Juan", "juan@mail.com", "123456" , "Apellido");
 
         Mockito.when(usuarioService.save(any(UsuarioDTO.class))).thenReturn(dto);
 
@@ -48,7 +48,7 @@ class UsuarioControllerTest {
 
     @Test
     void getUsuarios_DeberiaRetornarLista() throws Exception {
-        UsuarioDTO dto = new UsuarioDTO(1, "Juan", "juan@mail.com", "123456");
+        UsuarioDTO dto = new UsuarioDTO(1, "Juan", "juan@mail.com", "123456" , "Apellido");
         Mockito.when(usuarioService.getUsuarios()).thenReturn(List.of(dto));
 
         mockMvc.perform(get("/api/usuarios"))
@@ -58,7 +58,7 @@ class UsuarioControllerTest {
 
     @Test
     void getUsuarioById_DeberiaRetornarUsuario() throws Exception {
-        UsuarioDTO dto = new UsuarioDTO(1, "Juan", "juan@mail.com", "123456");
+        UsuarioDTO dto = new UsuarioDTO(1, "Juan", "juan@mail.com", "123456" , "Apellido");
         Mockito.when(usuarioService.getUsuarioById(1)).thenReturn(dto);
 
         mockMvc.perform(get("/api/usuarios/1"))
@@ -77,7 +77,7 @@ class UsuarioControllerTest {
 
     @Test
     void editarUsuario_DeberiaRetornar200() throws Exception {
-        UsuarioDTO dto = new UsuarioDTO(1, "Nuevo", "nuevo@mail.com", "222");
+        UsuarioDTO dto = new UsuarioDTO(1, "Nuevo", "nuevo@mail.com", "222" , "Apellido");
         Mockito.when(usuarioService.actualizarUsuario(Mockito.eq(1), any(UsuarioDTO.class))).thenReturn(dto);
 
         mockMvc.perform(put("/api/usuarios/1")

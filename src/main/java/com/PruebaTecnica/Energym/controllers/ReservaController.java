@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 @Tag(name = "Reservas", description = "Operaciones relacionadas con las reservas de clases")
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/reservas")
 public class ReservaController {
 
@@ -69,6 +71,7 @@ public class ReservaController {
 
     @Operation(summary = "Eliminar una reserva")
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponseDTO> borrarReserva(@PathVariable int id) {
         boolean eliminado = reservaService.borrarReserva(id);
         if (eliminado) {
@@ -90,6 +93,7 @@ public class ReservaController {
 
     @Operation(summary = "Marcar asistencia a una clase")
     @PutMapping("/{id}/asistio")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Map<String , Integer>> marcarAsistencia(@PathVariable int id) {
         int cantidadAsistenciasMes = reservaService.marcarAsistencia(id);
         Map<String, Integer> response = new HashMap<>();
