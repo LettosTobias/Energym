@@ -19,7 +19,7 @@ public interface ReservaRepository extends JpaRepository<ReservaModel, Integer> 
     long cantidadReservasPorClase(@Param("claseId") int claseId);
 
 
-   boolean existsByUsuarioIdAndClaseIdAndFechaReserva(int usuarioId, int claseId, LocalDateTime fechaReserva);
+   boolean existsByUsuarioIdAndClaseId(int usuarioId, int claseId);
 
     @Query("SELECT r FROM ReservaModel r " +
        "WHERE r.usuario.id = :usuarioId AND r.asistio = true " +
@@ -42,6 +42,11 @@ public interface ReservaRepository extends JpaRepository<ReservaModel, Integer> 
             "ORDER BY totalReservas DESC")
    List<Object[]> obtenerClases();
 
+
+    @Query("SELECT r FROM ReservaModel r " +
+            "WHERE r.usuario.id = :usuarioId " +
+            "ORDER BY r.fechaReserva ASC")
+    List<ReservaModel> findByUsuarioId(int usuarioId);
 
 }
 

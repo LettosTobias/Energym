@@ -45,8 +45,8 @@ public class ReservaService {
             .findById(reservaDTO.getUsuarioId())
             .orElseThrow(() -> new UsuarioNotFoundException());        
 
-        if (reservaRepository.existsByUsuarioIdAndClaseIdAndFechaReserva(
-            usuario.getId(), clase.getId(), reservaDTO.getFechaReserva())) {
+        if (reservaRepository.existsByUsuarioIdAndClaseId(
+            usuario.getId(), clase.getId())) {
         throw new ReservaNoDisponibleException("Ya estás inscripto en esta clase ese día.");
     }
 
@@ -110,6 +110,18 @@ public class ReservaService {
                 .toList();
 
         return new AsistenciasUsuarioDTO(usuario.getId(), usuario.getNombre(), reservasDTO);
+    }
+
+
+    public List<ReservaDTO> getReservasPorUsuario(int usuarioId) {
+        UsuarioModel usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        List<ReservaModel> reservas = reservaRepository.findByUsuarioId(usuarioId);
+
+        return reservas.stream()
+                .map(ReservaDTO::new)
+                .toList();
     }
 
     public int marcarAsistencia(int reservaId) {

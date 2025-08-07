@@ -51,6 +51,11 @@ public class ReservaController {
         return ResponseEntity.ok(reservaService.obtenerHistorialAsistencias(usuarioId));
     }
 
+    @GetMapping("/usuario/{usuarioId}")
+    public ResponseEntity<List<ReservaDTO>> getReservasPorUsuario(@PathVariable int usuarioId){
+        return ResponseEntity.ok(reservaService.getReservasPorUsuario(usuarioId));
+    }
+
     @Operation(summary = "Obtener una reserva por su ID")
     @GetMapping("/{id}")
     public ResponseEntity<ReservaDTO> getReserva(@PathVariable int id) {
